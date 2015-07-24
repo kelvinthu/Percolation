@@ -5,9 +5,12 @@
 public class Percolation {
     private WeightedQuickUnionUF site;
     private boolean[] isOpened;
-    int size;
+    private int size;
     
     public Percolation(int N) throws java.lang.IllegalArgumentException {
+        if (N <= 0) {
+            throw new IllegalArgumentException("N should be greater than 0");
+        }
         site = new WeightedQuickUnionUF((N*N) + 2);
         size = N*N;
         isOpened = new boolean[N*N];
@@ -16,8 +19,8 @@ public class Percolation {
         }
     }
     public void open(int i, int j) throws java.lang.IndexOutOfBoundsException {
-       // validate(i);
-       // validate(j);
+        validate(i);
+       validate(j);
         int no = xyTo1D(i, j);
         int k = (getRowSize() + 1) -i;
         
@@ -64,16 +67,18 @@ public class Percolation {
     }
     private void validate(int p) {
         int N = getRowSize();
-        if (p < 0 || p >= N) {
+        if (p <= 0 || p > N) {
             throw new IndexOutOfBoundsException("index " + p + " is not between 0 and " + N);
         }
     }
     public boolean isOpen(int i, int j) throws java.lang.IndexOutOfBoundsException {
+        validate(i);
+        validate(j);
         return isOpened[xyTo1D(i, j)];
     }
     public boolean isFull(int i, int j) {
-       // validate(i);
-       // validate(j);
+       validate(i);
+       validate(j);
         int no = xyTo1D(i, j);
         
         return site.connected(no, size + 1);
