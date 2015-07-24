@@ -1,3 +1,3 @@
 # Percolation
-* Only Percolation class and PercolationStats is the work of the uploader
-* Percolation Visualizer is a test file written by Princeton University.
+* Assignment 1 from princeton university online course. Uses WeightedUnionQuickUF class from Princeton
+
